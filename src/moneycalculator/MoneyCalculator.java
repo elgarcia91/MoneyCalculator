@@ -1,8 +1,12 @@
 package moneycalculator;
 
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import moneycalculator.Command.ActionListenerFactory;
 import moneycalculator.Command.Command;
 import moneycalculator.Command.CommandMap;
+import moneycalculator.Model.Currency;
 import moneycalculator.Persistence.FileExchangeRateLoader;
 import moneycalculator.Model.ExchangeRate;
 import moneycalculator.Model.Money;
@@ -43,7 +47,7 @@ public class MoneyCalculator {
         ExchangeRate rate;
         moneyDialog.dialog();
         System.out.println("to: ");
-        currencyDialog.dialog();
+        currencyDialog.dialog("");
         rate = exchangeLoader.load(moneyDialog.getMoney().getCurrency(), currencyDialog.getCurrency());
         Money result = exchanger.exchange(moneyDialog.getMoney().getAmount(), rate);
         MoneyViewer moneyViewer = new ConsoleMoneyViewer(result);
@@ -68,15 +72,23 @@ public class MoneyCalculator {
         commands.add("calc", new Command() {
             @Override
             public void execute() {
-                Money money = frame.getMoney();
-                MoneyViewer viewer = frame.getMoneyViewer();
-                ExchangeRate rate = exchangeLoader.load(money.getCurrency(), frame.getCurrencyTo());
+                Money money = frame.getMoneyDialog().getMoney();
+                ExchangeRate rate = exchangeLoader.load(money.getCurrency(), new Currency("USD", "Dólar Americano", "$"));//frame.getCurrencyDialog().getCurrency();
                 Money result = exchanger.exchange(money.getAmount(), rate);
+                String param = result.toString();
+                frame.add(createTextField(param),BorderLayout.SOUTH);
+                MoneyViewer viewer = frame.getMoneyViewer();
                 viewer.setMoney(result);
                 viewer.showMoney();
             }
         });
         return commands;
+    }
+    
+    private JLabel createTextField(String param){
+        JLabel text = new JLabel(" ");
+        text.setText(param);
+        return text;
     }
 
     private void initialize(String fileCurrencies, String fileRates) {

@@ -54,7 +54,7 @@ public class SwingMoneyDialog extends JPanel implements MoneyDialog {
 
     private JPanel createCurrencyDialog() {
         SwingCurrencyDialog panel = new SwingCurrencyDialog();
-        panel.dialog();
+        panel.dialog("From: ");
         currency = panel.getCurrency();
         return panel;
     }

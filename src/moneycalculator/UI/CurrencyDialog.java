@@ -4,7 +4,7 @@ import moneycalculator.Model.Currency;
 
 public interface CurrencyDialog {
 
-    public void dialog();
+    public void dialog(String label);
 
     public Currency getCurrency();
 }

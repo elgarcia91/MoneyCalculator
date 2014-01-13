@@ -8,7 +8,7 @@ public class Number {
     public Number(long numerator, long denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
-        reduce();
+        this.reduce();
     }
 
     public Number(long number) {
@@ -23,7 +23,7 @@ public class Number {
             denominator = denominator * 10;
             numerator = (long) (number * denominator);
         }
-        reduce();
+        this.reduce();
     }
 
     public long getNumerator() {
@@ -107,6 +107,6 @@ public class Number {
 
     @Override
     public String toString() {
-        return String.valueOf(numerator / denominator);
+        return String.valueOf((double)numerator / (double) denominator);
     }
 }

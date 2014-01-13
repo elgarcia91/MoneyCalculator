@@ -6,8 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
 import moneycalculator.Model.Currency;
-import moneycalculator.Model.Number;
 import moneycalculator.Model.ExchangeRate;
+import moneycalculator.Model.Number;
 
 public class FileExchangeRateLoader implements ExchangeRateLoader {
 

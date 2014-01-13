@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import moneycalculator.Command.ActionListenerFactory;
 import moneycalculator.Model.Currency;
 import moneycalculator.Model.Money;
+import moneycalculator.UI.CurrencyDialog;
+import moneycalculator.UI.MoneyDialog;
 import moneycalculator.UI.MoneyViewer;
 import moneycalculator.UI.Swing.SwingCurrencyDialog;
 import moneycalculator.UI.Swing.SwingMoneyDialog;
@@ -17,15 +19,15 @@ import moneycalculator.UI.Swing.SwingMoneyViewer;
 public class ApplicationFrame extends JFrame {
 
     private ActionListenerFactory factory;
-    private Money money;
-    private Currency currencyTo;
+    private MoneyDialog money;
+    private CurrencyDialog currencyTo;
     private MoneyViewer moneyViewer;
 
     ApplicationFrame(ActionListenerFactory factory) {
         super("Money Calculator");
         this.factory = factory;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(750, 200);
+        this.setSize(600,200);
         this.setLocationRelativeTo(null);
         this.createComponents();
         this.setVisible(true);
@@ -33,8 +35,8 @@ public class ApplicationFrame extends JFrame {
 
     private void createComponents() {
         this.add(createInputPanel(), BorderLayout.NORTH);
-        this.add(createToolbar(), BorderLayout.SOUTH);
-        this.add(createOutputPanel(), BorderLayout.CENTER);
+        this.add(createToolbar(), BorderLayout.CENTER);
+        this.add(createOutputPanel(), BorderLayout.SOUTH);
     }
 
     private JPanel createInputPanel() {
@@ -56,22 +58,22 @@ public class ApplicationFrame extends JFrame {
 
     private JPanel createOutputPanel() {
         SwingMoneyViewer panel = new SwingMoneyViewer();
-        moneyViewer = panel;
         panel.showMoney();
+        moneyViewer = panel;
         return panel;
     }
 
     private JPanel createSwingMoneyDialog() {
         SwingMoneyDialog panel = new SwingMoneyDialog();
         panel.dialog();
-        money = panel.getMoney();
+        money = panel;
         return panel;
     }
 
     private JPanel createSwingCurrencyDialog() {
         SwingCurrencyDialog panel = new SwingCurrencyDialog();
-        panel.dialog();
-        currencyTo = panel.getCurrency();
+        panel.dialog("");
+        currencyTo = panel;
         return panel;
     }
 
@@ -87,11 +89,11 @@ public class ApplicationFrame extends JFrame {
         return exit;
     }
 
-    public Money getMoney() {
+    public MoneyDialog getMoneyDialog() {
         return money;
     }
 
-    public Currency getCurrencyTo() {
+    public CurrencyDialog getCurrencyDialog() {
         return currencyTo;
     }
 

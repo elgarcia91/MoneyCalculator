@@ -29,7 +29,7 @@ public class ConsoleMoneyDialog implements MoneyDialog {
 
     private void getCurrency() {
         CurrencyDialog consoleCurrencyDialog = new ConsoleCurrencyDialog();
-        consoleCurrencyDialog.dialog();
+        consoleCurrencyDialog.dialog("");
         currency = consoleCurrencyDialog.getCurrency();
     }
 }

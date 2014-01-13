@@ -1,16 +1,21 @@
 package moneycalculator.UI.Swing;
 
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import moneycalculator.Model.Currency;
+import moneycalculator.Model.Number;
 import moneycalculator.Model.Money;
 import moneycalculator.UI.MoneyViewer;
 
 public class SwingMoneyViewer extends JPanel implements MoneyViewer {
 
-    private Money money;
+    private Money money= new Money(new Number(20), new Currency("MPR", "Moneda de prueba", "&"));
     private JLabel label;
 
     public SwingMoneyViewer() {
+        super(new FlowLayout(FlowLayout.CENTER));
         label = new JLabel(" ");
     }
 
@@ -21,6 +26,6 @@ public class SwingMoneyViewer extends JPanel implements MoneyViewer {
 
     @Override
     public void showMoney() {
-        label.setText(String.valueOf(money));
+        label.setText(money.toString());
     }
 }

@@ -10,7 +10,7 @@ public class ConsoleCurrencyDialog implements CurrencyDialog {
     private Currency currency;
 
     @Override
-    public void dialog() {
+    public void dialog(String label) {
         Currency searchResult;
         while (true) {
             System.out.println("Enter the currency: ");
